@@ -22,26 +22,33 @@
                 inputType="text"
                 inputLabel="Kategori:"
             />
-            <div class="form-group">
-                <button class="add-product__btn">
-                    Gönder
-                </button>
-            </div>
+            <Button
+                buttonText="Gönder"
+                @click.native="buttonClicked"
+            />
         </div>
     </div>
 </template>
 
 <script>
 import Input from '@/components/Input.vue'
+import Button from '@/components/Button.vue'
 
 export default {
     name: 'AddProduct',
     components: {
-        Input
+        Input,
+        Button
+    },
+    methods: {
+        buttonClicked () {
+            console.log('...')
+        }
     }
 }
 </script>
 
 <style lang="sass" scoped>
-    
+    .add-product
+        margin: 30px 0 0
 </style>
