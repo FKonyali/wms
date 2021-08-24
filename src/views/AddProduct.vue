@@ -1,34 +1,55 @@
 <template>
     <div class="container">
         <div class="add-product">
+            <!-- {{ addProduct }} -->
             <Input
                 inputName="name"
                 inputType="text"
                 inputLabel="Ürün Adı:"
                 :inputMaxLength="250"
-                v-model="form.name"
+                v-model="addProduct.title"
+                :inputValue="addProduct.title"
             />
             <Input
                 inputName="amount"
                 inputType="number"
                 inputLabel="Stok Miktarı:"
-                v-model="form.amount"
+                v-model="addProduct.amountofstock"
+                :inputValue="addProduct.amountofstock"
             />
             <Input
                 inputName="brand"
                 inputType="text"
                 inputLabel="Marka:"
-                v-model="form.brand"
+                v-model="addProduct.brand"
+                :inputValue="addProduct.brand"
             />
             <Input
                 inputName="category"
                 inputType="text"
                 inputLabel="Kategori:"
-                v-model="form.category"
+                v-model="addProduct.category"
+                :inputValue="addProduct.category"
+            />
+            <Input
+                inputName="createdate"
+                inputType="text"
+                inputLabel="Oluşturulma Tarihi:"
+                v-model="addProduct.createDate"
+                :inputValue="addProduct.createDate"
+                :inputDisabled="addProduct.createDate ? true : false"
+            />
+            <Input
+                inputName="lastupdatedate"
+                inputType="text"
+                inputLabel="Güncelleme Tarihi:"
+                v-model="addProduct.lastUpdateDate"
+                :inputValue="addProduct.lastUpdateDate"
+                :inputDisabled="addProduct.lastUpdateDate ? true : false"
             />
             <Button
                 @click.native="buttonClicked"
-                :buttonDisabled="(form.name && form.amount && form.brand && form.category) ? false : true"
+                :buttonDisabled="(addProduct.title && addProduct.amountofstock && addProduct.brand && addProduct.category) ? false : true"
             >
                 Gönder
             </Button>
@@ -37,6 +58,7 @@
 </template>
 
 <script>
+// import { SaveToLocalStorage } from '@/helpers/LocalStorage'
 import Button from '@/components/Button.vue'
 import Input from '@/components/Input.vue'
 
@@ -49,18 +71,60 @@ export default {
     data () {
         return {
             form: {
-                name: '',
-                amount: '',
+                title: '',
                 brand: '',
-                category: ''
+                category: '',
+                createDate: '',
+                amountofstock: '',
+                lastUpdateDate: ''
             }
         }
     },
     methods: {
         buttonClicked () {
             console.log('...')
+            const foundIndex = this.getProducts.products.findIndex(x => x.id == this.getEditProduct.id)
+            console.log(foundIndex)
+            // this.$store.commit('updateProduct', this.getProduct.produts[foundIndex])
         }
-    }
+    },
+    computed: {
+        getEditProduct () {
+            return this.$store.getters.getEditProduct
+        },
+        addProduct () {
+            return this.$store.getters.getAddProduct
+        },
+        getProducts () {
+            return this.$store.getters.getProduct
+        }
+    },
+    mounted () {
+        this.$store.commit('updateAddProduct', {
+            title: this.getEditProduct.title,
+            brand: this.getEditProduct.brand,
+            category: this.getEditProduct.category ? this.getEditProduct.category.map(function (e) { return e.name }).join(', ') : this.getEditProduct.category,
+            createDate: this.getEditProduct.createDate,
+            amountofstock: this.getEditProduct.amountofstock,
+            lastUpdateDate: this.getEditProduct.lastUpdateDate
+        })
+    },
+    // watch: {
+    //     addProduct: {
+    //         handler (val) {
+    //             const foundIndex = this.getProducts.products.findIndex(x => x.id == this.getEditProduct.id)
+    //             const newArr = []
+    //             console.log(foundIndex)
+    //             this.$store.commit('updateAddProduct', {
+    //                 ...this.addProduct,
+
+    //             })
+
+    //             items.splice(foundIndex, 1, newArr)
+    //         },
+    //         deep: true
+    //     }
+    // }
 }
 </script>
 

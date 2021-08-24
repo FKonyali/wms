@@ -15,10 +15,10 @@
             </ul>
         </div>
         <div class="product-item__buttons">
-            <Button class="product-item__button">
+            <Button class="product-item__button" @click.native="productEdit">
                 Düzenle
             </Button>
-            <Button class="product-item__button">
+            <Button class="product-item__button" @click.native="productRemove">
                 Sil
             </Button>
         </div>
@@ -37,6 +37,16 @@ export default {
     },
     components: {
         Button
+    },
+    methods: {
+        productEdit () {
+            this.$store.commit('updateEditProduct', this.productObj)
+
+            this.$router.push('/add-product')
+        },
+        productRemove () {
+
+        }
     }
 }
 </script>

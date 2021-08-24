@@ -13,6 +13,8 @@
             :maxlength="inputMaxLength"
             class="form-group__input"
             @input="eventInput"
+            :disabled="inputDisabled"
+            :value="inputValue"
         >
     </div>
 </template>
@@ -41,7 +43,11 @@ export default {
         },
         inputMaxLength: {
             type: Number
-        }
+        },
+        inputDisabled: {
+            type: Boolean
+        },
+        inputValue: {}
     },
     methods: {
         eventInput (e) {
