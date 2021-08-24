@@ -12,6 +12,7 @@
             :id="inputName"
             :maxlength="inputMaxLength"
             class="form-group__input"
+            @input="eventInput"
         >
     </div>
 </template>
@@ -40,6 +41,11 @@ export default {
         },
         inputMaxLength: {
             type: Number
+        }
+    },
+    methods: {
+        eventInput (e) {
+            this.$emit('input', e.target.value)
         }
     }
 }

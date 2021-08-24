@@ -1,5 +1,7 @@
+import { LoadFromLocalStorage } from '../helpers/LocalStorage'
+
 export default {
     product: {
-        products: []
+        products: LoadFromLocalStorage() || []
     }
 }

@@ -24,6 +24,7 @@ export default {
 <style lang="sass" scoped>
     .header
         font-size: 16px
+        padding: 30px 0
 
         &__links
             display: flex

@@ -1,6 +1,10 @@
 <template>
-    <button class="button" v-if="buttonText">
-        {{ buttonText }}
+    <button
+        class="button"
+        :disabled="buttonDisabled"
+        v-if="$slots"
+    >
+        <slot></slot>
     </button>
 </template>
 
@@ -8,8 +12,9 @@
 export default {
     name: 'Button',
     props: {
-        buttonText: {
-            props: String
+        buttonDisabled: {
+            type: Boolean,
+            default: false
         }
     }
 }
@@ -20,4 +25,7 @@ export default {
         padding: 10px 15px
         min-width: 100px
         cursor: pointer
+
+        &:disabled
+            cursor: not-allowed
 </style>
