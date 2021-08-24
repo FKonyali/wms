@@ -1,5 +1,10 @@
 # wms
 
+## Node version
+```
+v14.16.1
+```
+
 ## Project setup
 ```
 npm install
